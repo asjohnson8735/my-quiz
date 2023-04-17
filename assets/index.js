@@ -11,7 +11,10 @@
 // THEN I can save my initials and score
 
 const startButton = document.getElementById('start-btn')
+
+
 const nextButton = document.getElementById('next-btn')
+
 const questionContainerElement = document.getElementById('question-container')
 
 let shuffledQuestions, currentQuestionIndex
@@ -29,7 +32,7 @@ nextButton.addEventListener('click', () => {
 function startGame() {
     console.log('Started')
     startButton.classList.add('hide')
-    shuffledQuestions = questions.sort(() => Math.random() -.5 )
+    shuffledQuestions = questions.sort(() => Math.random() - .5)
     currentQuestionIndex = 0
     questionContainerElement.classList.remove('hide')
     setNextQuestion()
@@ -45,7 +48,7 @@ function setNextQuestion() {
 function showQuestion(question) {
 
     questionElement.innerText = question.question
-    question.answer.forEach(answer => {
+    question.answers.forEach(answer => {
     const button = document.createElement('button')
     button.innerText = answer.text
     button.classList.add('btn')
@@ -60,10 +63,10 @@ function showQuestion(question) {
 function resetState() {
 clearStatusClass(document.body)
 nextButton.classList.add('hide')
-while (answerButtonsElement) {
+while (answerButtonsElement.firstChild) {
     answerButtonsElement.removeChild
     (answerButtonsElement.firstChild)
-}
+} }
 
 function selectAnswer(e) {
 
@@ -72,8 +75,7 @@ function selectAnswer(e) {
     setStatusClass(document.body, correct)
     Array.from(answerButtonsElement.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
-    }
-  )
+    })
   if (shuffledQuestions.length > currentQuestionIndex + 1 ) {
   nextButton.classList.remove('hide')
   } else {
@@ -81,7 +83,6 @@ function selectAnswer(e) {
     startButton.classList.remove('hide')
   }
 }
-
 
 function setStatusClass(element, correct) {
 
@@ -93,7 +94,6 @@ function setStatusClass(element, correct) {
     }
 }
 
-}
 
 function clearStatusClass(element) {
 
@@ -101,21 +101,62 @@ function clearStatusClass(element) {
     element.classList.remove('wrong')
 }
 const questions = [
+    {
+        question: 'What is my favorite game' ,
+        answers: [
+            
+                { text: 'mario', correct: true},
+                { text: 'zelda', correct: false},
+                { text: 'valorant', correct: false},
+                { text: 'pokemon', correct: false},
+                
 
+            
+
+        ]
+    },
+    {
+        question: 'what is my favorite number' ,
+        answers: [
+            
+                { text: '4', correct: false},
+                { text: '8', correct: false},
+                { text: '9', correct: true},
+                { text: '6', correct: false},
+                
+
+            
+
+        ]
+    },
+    {
+        question: 'idk dawg' ,
+        answers: [
+            
+                { text: '4', correct: false},
+                { text: 'right anser', correct: true},
+                { text: '7', correct: false},
+                { text: '6', correct: false},
+                
+
+            
+
+        ]
+    },
     {
         question: 'What is 2+2' ,
         answers: [
-            [
+            
                 { text: '4', correct: true},
                 { text: '8', correct: false},
                 { text: '7', correct: false},
                 { text: '6', correct: false},
                 
 
-            ]
+            
 
         ]
     }
-
+   
 
 ]

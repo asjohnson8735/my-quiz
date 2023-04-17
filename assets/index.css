@@ -1,9 +1,17 @@
+*, *::before, *::after {
+font-family: Georgia, 'Times New Roman', Times, serif;
+box-sizing: border-box;
+
+}
+
 body {
 
     padding: 0;
     margin: 0;
     display: flex;
     justify-content: center;
+    width: 100vw;
+    height: 100vh;
     align-items: center;
     background-color: bisque;
 }
@@ -18,16 +26,6 @@ body {
     border-radius: 10px;
 }
 
-/* .button {
-
-
-
-}
-
-.button:hover {
-
-    border-color: black;
-} */
 
 .controls {
     display: flex;
