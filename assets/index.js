@@ -9,18 +9,16 @@
 // THEN the game is over
 // WHEN the game is over
 // THEN I can save my initials and score
-
 const startButton = document.getElementById('start-btn')
-
-
+let timeLeft = 60; // set the total time for the quiz
+let timerId;
 const nextButton = document.getElementById('next-btn')
-
+const scoreHolder = document.getElementById('score')
 const questionContainerElement = document.getElementById('question-container')
-
 let shuffledQuestions, currentQuestionIndex
-
 const questionElement = document.getElementById('question')
 const answerButtonsElement = document.getElementById('answer-buttons')
+let score =  10000;
 
 startButton.addEventListener('click', startGame)
 
@@ -31,28 +29,43 @@ nextButton.addEventListener('click', () => {
 
 function startGame() {
     console.log('Started')
+    timeLeft = 60; // reset the timer for a new game
     startButton.classList.add('hide')
     shuffledQuestions = questions.sort(() => Math.random() - .5)
     currentQuestionIndex = 0
     questionContainerElement.classList.remove('hide')
     setNextQuestion()
+    startTimer();
 }
+function startTimer() {
+    
+    timerId = setInterval(() => {
+      timeLeft--;
+      document.getElementById('time').textContent = timeLeft;
+      if (timeLeft <= 0) {
+        clearInterval(timerId);
+        resetState();
+        startButton.innerText = 'Restart';
+        startButton.classList.remove('hide');
+      }
+     
+    }, 1000);
+}
+
 
 function setNextQuestion() {
     resetState()
     showQuestion(shuffledQuestions[currentQuestionIndex])
-
-
 }
-
 function showQuestion(question) {
-
+    scoreHolder.innerText = "Your Score: " + score
     questionElement.innerText = question.question
     question.answers.forEach(answer => {
     const button = document.createElement('button')
     button.innerText = answer.text
     button.classList.add('btn')
     if (answer.correct) {
+       scoreHolder.innerText = " Your Score: " + score 
         button.dataset.correct = answer.correct
     }
     button.addEventListener('click', selectAnswer)
@@ -83,18 +96,17 @@ function selectAnswer(e) {
     startButton.classList.remove('hide')
   }
 }
-
 function setStatusClass(element, correct) {
 
     clearStatusClass(element)
     if (correct) {
+        score++;
+        console.log(score)
         element.classList.add('correct')
     } else {
         element.classList.add('wrong')
     }
 }
-
-
 function clearStatusClass(element) {
 
     element.classList.remove('correct')
@@ -104,15 +116,10 @@ const questions = [
     {
         question: 'What is my favorite game' ,
         answers: [
-            
                 { text: 'mario', correct: true},
                 { text: 'zelda', correct: false},
                 { text: 'valorant', correct: false},
                 { text: 'pokemon', correct: false},
-                
-
-            
-
         ]
     },
     {
@@ -123,10 +130,6 @@ const questions = [
                 { text: '8', correct: false},
                 { text: '9', correct: true},
                 { text: '6', correct: false},
-                
-
-            
-
         ]
     },
     {
@@ -134,13 +137,9 @@ const questions = [
         answers: [
             
                 { text: '4', correct: false},
-                { text: 'right anser', correct: true},
+                { text: 'right anwser', correct: true},
                 { text: '7', correct: false},
                 { text: '6', correct: false},
-                
-
-            
-
         ]
     },
     {
@@ -151,12 +150,11 @@ const questions = [
                 { text: '8', correct: false},
                 { text: '7', correct: false},
                 { text: '6', correct: false},
-                
-
-            
-
         ]
     }
-   
-
 ]
+function endGame() {
+    clearInterval(timerId); 
+    
+    // add any other end game logic here
+  }
