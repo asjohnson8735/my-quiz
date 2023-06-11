@@ -18,7 +18,7 @@ const questionContainerElement = document.getElementById('question-container')
 let shuffledQuestions, currentQuestionIndex
 const questionElement = document.getElementById('question')
 const answerButtonsElement = document.getElementById('answer-buttons')
-let score =  10000;
+let score =  0;
 
 startButton.addEventListener('click', startGame)
 
@@ -114,16 +114,16 @@ function clearStatusClass(element) {
 }
 const questions = [
     {
-        question: 'What is my favorite game' ,
+        question: 'What is the characters name that you control in The Legend of Zelda' ,
         answers: [
-                { text: 'mario', correct: true},
-                { text: 'zelda', correct: false},
-                { text: 'valorant', correct: false},
-                { text: 'pokemon', correct: false},
+                { text: 'Link', correct: true},
+                { text: 'Zelda', correct: false},
+                { text: 'Batman', correct: false},
+                { text: 'Chris Rock', correct: false},
         ]
     },
     {
-        question: 'what is my favorite number' ,
+        question: 'What is my favorite number' ,
         answers: [
             
                 { text: '4', correct: false},
@@ -133,13 +133,13 @@ const questions = [
         ]
     },
     {
-        question: 'idk dawg' ,
+        question: 'What is the right answer' ,
         answers: [
             
-                { text: '4', correct: false},
-                { text: 'right anwser', correct: true},
-                { text: '7', correct: false},
-                { text: '6', correct: false},
+                { text: 'That one', correct: false},
+                { text: 'This one', correct: true},
+                { text: 'The other one', correct: false},
+                { text: 'Not this one', correct: false},
         ]
     },
     {
@@ -156,5 +156,4 @@ const questions = [
 function endGame() {
     clearInterval(timerId); 
     
-    // add any other end game logic here
   }
